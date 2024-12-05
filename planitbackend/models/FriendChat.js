@@ -9,4 +9,4 @@ const friendChatSchema = new mongoose.Schema(
     { timestamps: true } 
 );
 
-module.exports = mongoose.model('Pogovor', friendChatSchema);
+module.exports = mongoose.model('FriendChat', friendChatSchema);

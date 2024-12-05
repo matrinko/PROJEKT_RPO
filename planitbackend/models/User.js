@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
     {
         username: { type: String, required: true },
         email: { type: String, required: true },
-        prijatelji: {type: Array, required: false},
+        prijatelji: {type: [String], default: []},
     },
     { timestamps: true } 
 );

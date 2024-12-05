@@ -8,6 +8,7 @@ const nalogaSchema = new mongoose.Schema(
         opis: {type: String, required: true },
         stanje: {type: String, required: true},
         id_projekt: {type:String, required: true},
+        ime_projekta: {type: String, required: true},
     },
     { timestamps: true } 
 );
