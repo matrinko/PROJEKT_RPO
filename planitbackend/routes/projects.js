@@ -36,4 +36,22 @@ router.get('/:id', async (req, res) => {  //req.body
   }
 });
 
+
+router.put('/dodaj/:ime/:id', async (req, res) => {
+  try {
+    const { ime, id } = req.params; 
+    const projekt = await Project.findOneAndUpdate(
+      { _id: id },
+      { $addToSet: { udelezenci: ime } }, 
+      { new: true }
+    );
+    res.status(200).json(projekt);
+    console.log(ime);
+  } catch (err) {
+    console.error('Napaka pri dodajanju imena v udeležence:', err);
+    res.status(500).json({ message: 'Napaka pri posodabljanju projekta.', error: err });
+  }
+});
+
+
 module.exports = router;
