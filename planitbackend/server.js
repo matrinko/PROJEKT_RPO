@@ -4,6 +4,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const projectRoutes = require('./routes/projects');
+const userRoutes = require('./routes/users');
 const nalogeRoutes = require('./routes/naloge')
 const usersRoutes = require('./routes/users')
 const friendchatRoutes = require('./routes/friendchats')
@@ -26,6 +27,7 @@ mongoose
   .catch((err) => console.log('Napaka pri povezavi z MongoDB:', err));
 
 app.use('/api/projects', projectRoutes);
+app.use('/api/users', userRoutes);
 app.use('/api/naloge', nalogeRoutes);
 app.use('/api/users', usersRoutes);
 app.use('/api/friendchats', friendchatRoutes);
