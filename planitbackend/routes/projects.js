@@ -25,7 +25,7 @@ router.get('/:username', async (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {  //req.body
+router.get('/dobi/:id', async (req, res) => {  //req.body
   try {
     const { id } = req.params
     console.log(id)
