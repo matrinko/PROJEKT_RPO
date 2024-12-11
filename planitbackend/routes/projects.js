@@ -15,9 +15,10 @@ router.post('/', async (req, res) => {
 });
 
 // pridobi vse projekte
-router.get('/', async (req, res) => {
+router.get('/:username', async (req, res) => {
   try {
-    const projekti = await Project.find({ udelezenci: "martin" });
+    const { username } = req.params;
+    const projekti = await Project.find({ udelezenci: username });
     res.status(200).json(projekti);
   } catch (err) {
     res.status(500).json({ message: 'Napaka pri pridobivanju projektov.', error: err });

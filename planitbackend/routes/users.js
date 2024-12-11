@@ -2,28 +2,40 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 
-// dodaj userja
-/*
-router.post('/', async (req, res) => {
+// Dodaj uporabnika
+router.post('/register', async (req, res) => {
   try {
-    const { ime, lastnik, rok, opis, stanje, id_projekt, ime_projekta } = req.body;
-    const novaNaloga = new Naloga({ ime, lastnik, rok, opis, stanje, id_projekt, ime_projekta });
-    await novaNaloga.save();
-    res.status(201).json(novaNaloga);
+    const { username, email, prijatelji = [], password } = req.body;
+    const novUser = new User({ username, email, prijatelji, password });
+    await novUser.save();
+    res.status(201).json(novUser);
   } catch (err) {
-    res.status(500).json({ message: 'Napaka pri shranjevanju naloge.', error: err });
+    console.error(err);
+    res.status(500).json({ message: 'Napaka pri ustvarjanju uporabnika.', error: err });
   }
 });
-*/
 
-// pridobi userja
-router.get('/', async (req, res) => {  //req.body
+// Preveri prijavo
+router.post('/login', async (req, res) => {
   try {
-    const { name } = req.query
-    console.log(name)
-    let user = await User.find({username : name });
+    const {username, password} = req.body;
+    const users = await User.find({ username: username, password: password });
+    if (users && users.length > 0) {
+      res.status(200).json({ success: true, username: users[0].username, _id: users[0]._id });
+    } else {
+      res.status(200).json({ success: false, message: 'Napacno uporabnisko ime ali geslo' });
+    }
+  } catch (err) {
+    res.status(500).json({ message: 'Napaka pri prijavi.', error: err });
+  }
+});
+
+// Pridobi uporabnika po imenu
+router.post('/getuser', async (req, res) => {
+  try {
+    const { username } = req.body;
+    const user = await User.find({username : username });
     res.status(200).json(user);
-    console.log(user)
   } catch (err) {
     res.status(500).json({ message: 'Napaka pri pridobivanju userja.', error: err });
   }
