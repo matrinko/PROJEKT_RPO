@@ -2,6 +2,16 @@ const express = require('express');
 const router = express.Router();
 const PodOpravilo = require('../models/PodOpravilo');
 
+router.post('/:id_naloge/:opis/:stanje/:prioriteta', async (req, res) => {  //req.body
+  try {
+    const { id_naloge, opis, stanje, prioriteta } = req.params
+    const novoOpravilo = new PodOpravilo({ id_naloge, opis, stanje, prioriteta });
+    await novoOpravilo.save();
+    res.status(201).json(novoOpravilo);
+  } catch (err) {
+    res.status(500).json({ message: 'Napaka pri shranjevanju projekta.', error: err });
+  }
+});
 
 router.get('/', async (req, res) => {  //req.body
     try {
