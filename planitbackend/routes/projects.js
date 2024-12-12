@@ -27,16 +27,13 @@ router.get('/:username', async (req, res) => {
 
 router.get('/dobi/:id', async (req, res) => {  //req.body
   try {
-    const { id } = req.params
-    console.log(id)
+    const { id } = req.params;
     let projekt = await Project.findOne({_id : id});
     res.status(200).json(projekt);
-    console.log(projekt)
   } catch (err) {
     res.status(500).json({ message: 'Napaka pri pridobivanju nalog.', error: err });
   }
 });
-
 
 router.put('/dodaj/:ime/:id', async (req, res) => {
   try {
@@ -47,7 +44,6 @@ router.put('/dodaj/:ime/:id', async (req, res) => {
       { new: true }
     );
     res.status(200).json(projekt);
-    console.log(ime);
   } catch (err) {
     console.error('Napaka pri dodajanju imena v udeležence:', err);
     res.status(500).json({ message: 'Napaka pri posodabljanju projekta.', error: err });

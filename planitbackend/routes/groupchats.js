@@ -7,6 +7,7 @@ const GroupChat = require('../models/GroupChat')
 router.post('/', async (req, res) => {
   try {
     const { id_skupina, text, posiljatelj } = req.body;
+    console.log("alo");
     const novGroupChat = new GroupChat({ id_skupina, text, posiljatelj });
     await novGroupChat.save();
     res.status(201).json(novGroupChat);
@@ -22,7 +23,7 @@ router.get('/', async (req, res) => {  //req.body
     const { id_skupina } = req.query
     let groupchats = await GroupChat.find({id_skupina});
     res.status(200).json(groupchats);
-    console.log(groupchats)
+    //console.log(groupchats)
   } catch (err) {
     res.status(500).json({ message: 'Napaka pri pridobivanju prijateljskih pogovorov.', error: err });
   }

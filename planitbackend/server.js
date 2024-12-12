@@ -35,7 +35,4 @@ app.use('/api/addFriend', addFriendRoute);
 app.use('/api/groupchats', groupChatRoutes);
 app.use('/api/opravila', opravilaRoutes);
 
-
-
-
 app.listen(PORT, () => console.log(`Strežnik teče na http://localhost:${PORT}`));

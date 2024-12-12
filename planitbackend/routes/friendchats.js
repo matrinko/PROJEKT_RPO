@@ -8,6 +8,8 @@ router.post('/', async (req, res) => {
   try {
     const { posiljatelj, text, udelezenca } = req.body;
     const novFriendChat = new FriendChat({ posiljatelj, text, udelezenca });
+    console.log("aloalo");
+    console.log(novFriendChat);
     await novFriendChat.save();
     res.status(201).json(novFriendChat);
   } catch (err) {

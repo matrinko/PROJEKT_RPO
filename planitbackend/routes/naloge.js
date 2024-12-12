@@ -60,5 +60,4 @@ router.put('/stanje/:id', async (req, res) => {  //req.body
   }
 });
 
-
 module.exports = router;
