@@ -61,7 +61,6 @@ router.post('/setprofileimage', async (req, res) => {
   }
 });
 
-// Pridobi profilno sliko uporabnika
 router.post('/getprofileimage', async (req, res) => {
   try {
     const { username } = req.body;

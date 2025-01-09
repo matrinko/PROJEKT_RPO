@@ -25,7 +25,7 @@ router.get('/:username', async (req, res) => {
   }
 });
 
-router.get('/dobi/:id', async (req, res) => {  //req.body
+router.get('/dobi/:id', async (req, res) => {
   try {
     const { id } = req.params;
     let projekt = await Project.findOne({_id : id});
