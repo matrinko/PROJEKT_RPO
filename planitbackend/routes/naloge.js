@@ -2,15 +2,44 @@ const express = require('express');
 const router = express.Router();
 const Naloga = require('../models/Naloga');
 
-// dodaj projekt
+
+
 router.post('/', async (req, res) => {
   try {
-    const { ime, lastnik, rok, opis, stanje, id_projekt, ime_projekta } = req.body;
-    const novaNaloga = new Naloga({ ime, lastnik, rok, opis, stanje, id_projekt, ime_projekta });
+    const { ime, opis, rok, stanje, lastnik, id_projekt, ime_projekta } = req.body;
+    
+    const novaNaloga = new Naloga({
+      ime,
+      opis,
+      rok,
+      stanje,
+      lastnik,
+      id_projekt,
+      ime_projekta
+    });
+    
     await novaNaloga.save();
+    
     res.status(201).json(novaNaloga);
+  } catch (error) {
+    res.status(500).json({ sporočilo: 'Napaka pri dodajanju naloge', error });
+  }
+});
+
+router.get("/dobiIdPoImenu/:ime", async (req, res) => {
+  try {
+    const ime = req.params.ime; // Ime, ki ga uporabnik izbere
+    const projekt = await Projekt.findOne({ ime: ime }); // Poiščite projekt po imenu
+
+    if (!projekt) {
+      return res.status(404).json({ message: "Projekt ni bil najden." });
+    }
+
+    // Vrne samo ID projekta
+    res.json({ id: projekt._id });
   } catch (err) {
-    res.status(500).json({ message: 'Napaka pri shranjevanju naloge.', error: err });
+    console.error("Napaka pri iskanju projekta:", err);
+    res.status(500).json({ message: "Napaka pri iskanju projekta.", error: err });
   }
 });
 

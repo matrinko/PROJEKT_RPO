@@ -75,4 +75,13 @@ router.post('/getprofileimage', async (req, res) => {
   }
 });
 
+router.get('/users/all', async (req, res) => {
+  try {
+    const users = await User.find({}, 'username prijatelji');
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;

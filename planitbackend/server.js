@@ -11,6 +11,9 @@ const friendchatRoutes = require('./routes/friendchats')
 const addFriendRoute = require('./routes/addFriendRoute')
 const groupChatRoutes = require('./routes/groupchats')
 const opravilaRoutes = require('./routes/opravila')
+const messageRoutes = require('./routes/messageRoutes');
+
+
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -34,5 +37,7 @@ app.use('/api/friendchats', friendchatRoutes);
 app.use('/api/addFriend', addFriendRoute);
 app.use('/api/groupchats', groupChatRoutes);
 app.use('/api/opravila', opravilaRoutes);
+app.use('/api/chats', messageRoutes);
+
 
 app.listen(PORT, () => console.log(`Strežnik teče na http://localhost:${PORT}`));
